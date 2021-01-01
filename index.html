@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/blood.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <section><h2>TypeScript - Typed JavaScript at Any Scale</h2></section>
+          <section>
+            <p>
+              TypeScript checks a program for errors before execution, and does
+              so based on the kinds of values, it’s a static type checker.
+            </p>
+          </section>
+          <section>
+            For usage in your project you may: <br />
+            For npm users:<code class="hljs" data-trim data-line-numbers>> npm install -g typescript</code><br />
+            For yarn users:<code class="hljs" data-trim data-line-numbers>> yarn add -g typescript</code>
+          </section>
+          <section>
+            For compiling: <br />
+            At the command line, run the TypeScript compiler:<br />
+            <code class="hljs" data-trim data-line-numbers>tsc yourTsFileForCompile.ts</code>
+          </section>
+        </section>
+        <section>
+          <section><h2>Basic Types</h2></section>
+          <section>
+            <h2 data-id="code-title">Boolean</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+        let isDone: boolean = false;
+					</code></pre>
+          </section>
+          <section>
+            <h2 data-id="code-title">Number</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+        let decimal: number = 6;
+					</code></pre>
+          </section>
+          <section>
+            <h2 data-id="code-title">String</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+        let color: string = "blue";</code></pre>
+          </section>
+          <section>
+            <h2 data-id="code-title">Array</h2>
+            <pre data-id="code-animation">
+            <code class="hljs" data-trim data-line-numbers>
+        let list: number[] = [1, 2, 3]</code>
+        or
+        <code class="hljs" data-trim data-line-numbers>let list: Array &ltnumber&gt = [1, 2, 3];</code>
+      </pre>
+          </section>
+          <section>
+            <h2 data-id="code-title">Tuple</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+            // Declare a tuple type
+            let x: [string, number];
+            // Initialize it
+            x = ["hello", 10]; // OK</code></pre>
+          </section>
+          <section>
+            <h2 data-id="code-title">Enum</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+            enum Color {
+              Red,
+              Green,
+              Blue,
+            }
+            let c: Color = Color.Green;</code></pre>
+          </section>
+          <section>
+            <h2 data-id="code-title">Unknown</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+              let notSure: unknown = 4;
+              notSure = "maybe a string instead";
+              notSure = false;</code></pre>
+          </section>
+          <section>
+            <h2 data-id="code-title">Any</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+              declare function getValue(key: string): any;
+              // OK, return value of 'getValue' is not checked
+              const str: string = getValue("myString");</code></pre>
+          </section>
+          <section>
+            <h2 data-id="code-title">Void</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+              function warnUser(): void {
+                console.log("This is my warning message");
+              }</code></pre>
+          </section>
+          <section>
+            <h2 data-id="code-title">Null and Undefined</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+              let u: undefined = undefined;
+              let n: null = null;</code></pre>
+          </section>
+          <section>
+            <h2 data-id="code-title">Never</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+              function error(message: string): never {
+                throw new Error(message);
+              }</code></pre>
+          </section>
+          <section>
+            <h2 data-id="code-title">Object</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+              declare function create(o: object | null): void;
+              // OK
+              create({ prop: 0 });
+              create(null);
+              create(42);
+              Argument of type '42' is not assignable to parameter of type 'object | null'.</code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2 data-id="code-title">Interfaces</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+              function printLabel(labeledObj: { label: string }) {
+                console.log(labeledObj.label);
+              }
+              let myObj = { size: 10, label: "Size 10 Object" };
+              printLabel(myObj);</code></pre>
+          </section>
+          <section>
+            <h4 data-id="code-title">Optional Properties</h4>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+              interface SquareConfig {
+              color?: string;
+              width?: number;
+            }
+            function createSquare(config: SquareConfig): { color: string; area: number } {
+              let newSquare = { color: "white", area: 100 };
+              if (config.color) {
+                newSquare.color = config.color;
+              }
+              if (config.width) {
+                newSquare.area = config.width * config.width;
+              }
+              return newSquare;
+            }
+            let mySquare = createSquare({ color: "black" })</code></pre>
+          </section>
+          <section>
+            <h4 data-id="code-title">Readonly properties</h4>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+           interface Point {
+              readonly x: number;
+              readonly y: number;
+            }</code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2 data-id="code-title">Functions</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+           function add(x: number, y: number): number {
+              return x + y;
+            }
+            let myAdd = function (x: number, y: number): number {
+              return x + y;
+            };</code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2 data-id="code-title">Classes</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs" data-trim data-line-numbers>
+            class Greeter {
+              greeting: string;
+              constructor(message: string) {
+                this.greeting = message;
+              }
+              greet() {
+                return "Hello, " + this.greeting;
+              }
+            }
+            let greeter = new Greeter("world");</code></pre>
+          </section>
+        </section>
+        <section>
+          <section data-auto-animate>
+            <h2 data-id="code-title">Generics</h2>
+            <pre data-id="code-animation">
+        <code class="hljs" data-trim data-line-numbers>
+          const arrayOfNumbers: Array&ltnumber&gt = [1, 2, 3, 4, 5]
+          const arrayOfString: Array&ltstring&gt =['hello','world']
+          function reverse&ltT&gt(array: T[]): T[]{
+              return array.reverse()
+          }
+          reverse(arrayOfNumbers);
+          reverse(arrayOfString);
+					</code></pre>
+          </section>
+        </section>
+        <section data-auto-animate>
+          <h2 data-id="code-title">Finally</h2>
+          Read the full
+          <a href="https://www.typescriptlang.org/docs/handbook/intro.html">
+            Handbook</a
+          >
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
